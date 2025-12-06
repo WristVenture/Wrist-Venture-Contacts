@@ -29,7 +29,7 @@ document.getElementById("saveBtn").onclick = function () {
   let isAndroid = /Android/i.test(navigator.userAgent);
   if (isAndroid) {
     window.location.href =
-'intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/contact;S.name=Wrist%20Venture;S.phone=7698941213;end';
+"content://com.android.contacts/contacts/create?name=Wrist%20Venture&phone=7698941213";
   } else {
     window.location.href = "WristVenture.vcf";
   }
