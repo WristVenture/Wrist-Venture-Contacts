@@ -20,20 +20,27 @@ button {
 <div class="card">
   <h1>Wrist Venture</h1>
   <p>📞 7698941213</p>
-
-  <button id="saveBtn">➕ Save Contact</button>
+  <button onclick="saveContact()">➕ Save Contact</button>
 </div>
 
 <script>
-document.getElementById("saveBtn").onclick = function () {
-  let isAndroid = /Android/i.test(navigator.userAgent);
-  if (isAndroid) {
-    window.location.href =
-"content://com.android.contacts/contacts/create?name=Wrist%20Venture&phone=7698941213";
-  } else {
-    window.location.href = "WristVenture.vcf";
-  }
-};
+function saveContact() {
+  const vcf = `BEGIN:VCARD
+VERSION:3.0
+FN:Wrist Venture
+TEL;TYPE=CELL:7698941213
+END:VCARD`;
+
+  const blob = new Blob([vcf], { type: "text/vcard" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "WristVenture.vcf";
+  a.click();
+
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
 </script>
 
 </body>
